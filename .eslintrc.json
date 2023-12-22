@@ -16,10 +16,14 @@
       "jsx": true
     }
   },
+
   "project": "./tsconfig.json",
+
   "plugins": ["react", "prettier"],
   "rules": {
     "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 }
