@@ -18,3 +18,16 @@
 .slick-active button {
   background-color: #46a358 !important;
 }
+
+.ant-slider-track {
+  border: 3px solid #46a358;
+  /* background-color: #46a358; */
+}
+
+.ant-slider .ant-slider-handle::after {
+  box-shadow: 0 0 0 2px #46a358;
+}
+
+.ant-slider .ant-slider-handler-1::after:hover {
+  box-shadow: 0 0 0 2px #46a358;
+}

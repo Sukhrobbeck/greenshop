@@ -8,7 +8,7 @@ interface DataItemsType {
   created_at: Date;
   created_by: string;
   route_path: string;
-  id: string;
+  _id: string;
 }
 
 const Categories: FC = () => {
@@ -18,8 +18,6 @@ const Categories: FC = () => {
       url: "https://greenshop.abduvoitov.com/api/flower/category",
       params: {
         access_token: "64bebc1e2c6d3f056a8c85b7",
-        page_size: 2,
-        current_page: 5,
       },
     })
       .then((res) => {
@@ -32,14 +30,15 @@ const Categories: FC = () => {
 
   return (
     <div>
-      <h3 className="font-bold">Categories</h3>
-      <div className="mt-[15px]">
+      <h3 className="font-bold text-lg font-['Inter'] pl-[18px]">Categories</h3>
+      <div className="mt-[7px]">
         {data?.map((value) => (
-          <div key={value.id} className="flex flex-col gap-[15px]">
-            <div className="flex justify-between">
-              <p>{String(value?.title)}</p>
-              <span>({value.count})</span>
-            </div>
+          <div
+            key={value._id}
+            className="flex justify-between pl-[30px] pr-[25px] text-neutral-700 font-bold font-['Inter'] leading-10 cursor-pointer hover:text-[#46a358] transition-colors"
+          >
+            <p>{value.title}</p>
+            <span>({value.count})</span>
           </div>
         ))}
       </div>
