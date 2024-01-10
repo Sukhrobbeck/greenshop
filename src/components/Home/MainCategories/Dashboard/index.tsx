@@ -5,7 +5,7 @@ import Discount from "./Discount";
 
 const Dashboard: FC = () => {
   return (
-    <div className="w-[310px] h-auto bg-[#f5f5f5] pt-[14px] max-lg:hidden mt-[25px]">
+    <div className="h-fit bg-[#f5f5f5f5] pt-[14px] max-lg:hidden w-[360px]">
       <Categories />
       <PriceRange />
       <Discount />

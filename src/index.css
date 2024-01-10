@@ -31,3 +31,13 @@
 .ant-slider .ant-slider-handler-1::after:hover {
   box-shadow: 0 0 0 2px #46a358;
 }
+
+.ant-skeleton-content {
+  height: 40px;
+}
+
+.ant-select-selector-items {
+  font-family: "Inter", sans-serif;
+  font-style: bold;
+  color: red;
+}

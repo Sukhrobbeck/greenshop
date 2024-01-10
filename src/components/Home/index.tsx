@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import Hero from "./Hero";
-import Dashboard from "./Dashboard";
+import MainCategories from "./MainCategories";
 
 const Home: FC = () => {
   return (
-    <div className="w-[80%] m-auto">
+    <div className="w-[80%] m-auto max-sm:w-[95%]">
       <Hero />
-      <Dashboard />
+      <MainCategories />
     </div>
   );
 };
