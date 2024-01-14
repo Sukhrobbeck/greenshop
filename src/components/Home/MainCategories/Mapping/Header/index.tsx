@@ -16,18 +16,25 @@ const Header: FC = () => {
       label: "Most Expensive",
     },
   ];
+
+  // const active_type_style = "pb-[3px] text-[#46A358] border-b border-[#46A358]";
+
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between items-center w-full">
       <div className="flex gap-[35px] cursor-pointer text-neutral-700 text-[15px] font-bold transition-colors hover:border-b-[#46a358] border-spacing-1">
         <p className="hover:text-[#46a358]">All Plants</p>
         <p className="hover:text-[#46a358]">New Arrivals</p>
         <p className="hover:text-[#46a358]">Sale</p>
       </div>
       <div className="flex gap-2 items-center">
-        <div className="max-lg:hidden">
+        <div className="max-lg:hidden flex gap-2 items-center text-[15px] font-bold text-neutral-700">
           Sort by:
           <Space wrap className="w-[140px]">
             <Select
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 700,
+              }}
               className="text-base font-bold text-neutral-700"
               defaultValue={"Default Sorting"}
               options={sortingOptions}

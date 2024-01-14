@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import Dashboard from "./Dashboard";
 import FlowerContainer from "./Mapping";
-import Header from "./Header";
+import Header from "./Mapping/Header";
 
 const MainCategories: FC = () => {
   return (
