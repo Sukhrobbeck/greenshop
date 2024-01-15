@@ -19,7 +19,7 @@
     "antd": "^5.12.3",
     "axios": "^1.6.2",
     "react": "^18.2.0",
-    "react-auth-kit": "^3.0.0-alpha.44",
+    "react-auth-kit": "^2.12.7",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-redux": "^9.0.4",
