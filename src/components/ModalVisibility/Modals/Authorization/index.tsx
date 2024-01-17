@@ -1,22 +1,28 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { Divider, Form, Input, Modal } from "antd";
 import { useReduxDispatch, useReduxSelector } from "../../../../hooks/useRedux";
-import { setAuthModal } from "../../../../redux/modalSlice";
+import {
+  setAuthModal,
+  setGoogleVerification,
+} from "../../../../redux/modalSlice";
 import {
   FacebookFilled,
   GoogleOutlined,
   ScanOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
 import { useSignIn } from "react-auth-kit";
+import { signInWithGoogle } from "../../../../config";
 
 const Authorization: FC = () => {
   const dispatch = useReduxDispatch();
   const { authModal } = useReduxSelector((state) => state.modal);
   const signIn = useSignIn();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onFinishFn = (e: { email: string; password: string }) => {
-    console.log(e);
+    setIsLoading(true);
     axios({
       url: "https://greenshop.abduvoitov.com/api/user/sign-in",
       params: {
@@ -25,7 +31,6 @@ const Authorization: FC = () => {
       method: "POST",
       data: e,
     }).then((res) => {
-      console.log(res);
       signIn({
         token: res.data.data.token,
         expiresIn: 3600,
@@ -33,6 +38,32 @@ const Authorization: FC = () => {
         authState: res.data.data.user,
       });
     });
+    setIsLoading(false);
+  };
+
+  const onGoogleAuth = async () => {
+    const data = await signInWithGoogle();
+    dispatch(setGoogleVerification());
+
+    await axios({
+      url: "https://greenshop.abduvoitov.com/api/user/sign-in/google",
+      params: {
+        access_token: "64bebc1e2c6d3f056a8c85b7",
+      },
+      data: {
+        email: data.user.email,
+      },
+      method: "POST",
+    }).then((res) => {
+      signIn({
+        token: res.data.data.token,
+        expiresIn: 3600,
+        tokenType: "Bearer",
+        authState: res.data.data.user,
+      });
+    });
+
+    dispatch(setGoogleVerification());
   };
 
   return (
@@ -42,7 +73,7 @@ const Authorization: FC = () => {
       footer={false}
       onCancel={() => dispatch(setAuthModal())}
     >
-      <div className="">
+      <div>
         <div className="flex gap-2 mt-[11px] w-full justify-center text-xl font-semibold text-neutral-700 cursor-pointer transition-colors">
           <h1 className="hover:text-[#46a358] text-[#46a358]">Login</h1>|
           <h1 className="hover:text-[#46a358]">Register</h1>
@@ -89,24 +120,33 @@ const Authorization: FC = () => {
               type="submit"
               className="w-[300px] h-[45px] bg-[#46a358] mt-[17px] text-white text-base font-bold rounded-md"
             >
-              Login
+              {isLoading ? <LoadingOutlined /> : "Login"}
             </button>
           </Form>
           <div className="w-[300px] flex justify-center mt-3">
             <Divider>Or login with</Divider>
           </div>
-          <div className="mt-[15px] flex flex-col gap-[15px] w-[300px] mb-5">
-            <button className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md">
-              <FacebookFilled className="pl-[15px]" />
-              Login with Facebook
+          <div className="mt-[15px] flex flex-col gap-[15px] w-[300px] mb-5 text-3 font-bold">
+            <button className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md hover:text-[#46a358] transition-colors">
+              <>
+                <FacebookFilled className="pl-[15px]" />
+                Login with Facebook
+              </>
             </button>
-            <button className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md">
-              <GoogleOutlined className="pl-[15px]" />
-              Login with Google
+            <button
+              onClick={onGoogleAuth}
+              className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md hover:text-[#46a358] transition-colors"
+            >
+              <>
+                <GoogleOutlined className="pl-[15px]" />
+                Login with Google
+              </>
             </button>
-            <button className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md">
-              <ScanOutlined className="pl-[15px]" />
-              Login with Qr Code
+            <button className="cursor-pointer flex items-center gap-2 border border-[#EAEAEA] h-[40px] w-full rounded-md hover:text-[#46a358] transition-colors">
+              <>
+                <ScanOutlined className="pl-[15px]" />
+                Login with QR code
+              </>
             </button>
           </div>
         </div>

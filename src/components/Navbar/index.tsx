@@ -10,12 +10,13 @@ import SiteMap from "./SiteMap";
 import { useReduxDispatch } from "../../hooks/useRedux";
 import { setAuthModal, setSiteMapVisibility } from "../../redux/modalSlice";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuthUser } from "react-auth-kit";
+import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
 
 const Navbar: FC = () => {
   const dispatch = useReduxDispatch();
   const navigate = useNavigate();
   const userData = useAuthUser()();
+  const isAuthed = useIsAuthenticated()();
   return (
     <>
       <div className="w-[80%] p-[32px] m-auto flex justify-between border-b border-[#46a358] max-sm:w-[95%] max-[350px]:px-[16px]">
@@ -45,8 +46,8 @@ const Navbar: FC = () => {
             className="bg-[#46a358] w-[96px] h-[36px] rounded-md text-white flex justify-center items-center gap-2"
             onClick={() => dispatch(setAuthModal())}
           >
-            {userData ? (
-              userData.name
+            {isAuthed ? (
+              userData?.name
             ) : (
               <>
                 <LoginOutlined className="text-[23px]" />
@@ -55,7 +56,7 @@ const Navbar: FC = () => {
             )}
           </button>
         </div>
-        <div className="flex gap-6 items-center  max-[750px]:flex hidden cursor-pointer">
+        <div className="gap-6 items-center  max-[750px]:flex hidden cursor-pointer">
           <SearchOutlined className="text-[23px] max-[350px]:hidden" />
           <ShoppingCartOutlined className="text-[23px] max-[350px]:hidden" />
           <MenuOutlined

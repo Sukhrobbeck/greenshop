@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     siteMapvisibility: false,
     authModal: false,
+    googleVerification: false,
   },
   reducers: {
     setSiteMapVisibility(state) {
@@ -13,8 +14,12 @@ const modalSlice = createSlice({
     setAuthModal(state) {
       state.authModal = !state.authModal;
     },
+    setGoogleVerification(state) {
+      state.googleVerification = !state.googleVerification;
+    },
   },
 });
 
 export default modalSlice.reducer;
-export const { setSiteMapVisibility, setAuthModal } = modalSlice.actions;
+export const { setSiteMapVisibility, setAuthModal, setGoogleVerification } =
+  modalSlice.actions;
