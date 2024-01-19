@@ -1,33 +1,85 @@
 import type { FC } from "react";
 import { Select, Space } from "antd";
+import { useSearchParams } from "react-router-dom";
 
 const Header: FC = () => {
   const sortingOptions = [
     {
-      value: "default sorting",
+      value: "default-sorting",
       label: "Default Sorting",
     },
     {
-      value: "the cheapest",
+      value: "the-cheapest",
       label: "The Cheapest",
     },
     {
-      value: "most expensive",
+      value: "most-expensive",
       label: "Most Expensive",
     },
   ];
 
-  // const active_type_style = "pb-[3px] text-[#46A358] border-b border-[#46A358]";
+  const active_type_style =
+    "pb-[4px] text-[#46A358] border-b-2 border-[#46A358] transition-colors";
+
+  const [getParams, setParams] = useSearchParams();
+  const range_min: string = String(getParams.get("range_min") ?? 0);
+  const range_max: string = String(getParams.get("range_max") ?? 1000);
+  const category: string = String(getParams.get("category") ?? "house-plants");
+  const sort: string = String(getParams.get("sort") ?? "default-sorting");
+
+  const active_type = getParams.get("type") ?? "all-plants";
+  console.log(active_type);
+
+  const onTypeChangeFn = (type: string) => {
+    setParams({
+      category,
+      range_min,
+      range_max,
+      type,
+      sort,
+    });
+  };
+
+  const sortByPrice = (sort: string) => {
+    setParams({
+      category,
+      range_min,
+      range_max,
+      type: active_type,
+      sort,
+    });
+  };
 
   return (
     <div className="flex justify-between items-center w-full">
       <div className="flex gap-[35px] cursor-pointer text-neutral-700 text-[15px] font-bold transition-colors hover:border-b-[#46a358] border-spacing-1">
-        <p className="hover:text-[#46a358]">All Plants</p>
-        <p className="hover:text-[#46a358]">New Arrivals</p>
-        <p className="hover:text-[#46a358]">Sale</p>
+        <p
+          className={`hover:text-[#46a358] ${
+            active_type === "all-plants" && active_type_style
+          }`}
+          onClick={() => onTypeChangeFn("all-plants")}
+        >
+          All Plants
+        </p>
+        <p
+          className={`hover:text-[#46a358] ${
+            active_type === "new-arrivals" && active_type_style
+          }`}
+          onClick={() => onTypeChangeFn("new-arrivals")}
+        >
+          New Arrivals
+        </p>
+        <p
+          className={`hover:text-[#46a358] ${
+            active_type === "sale" && active_type_style
+          }`}
+          onClick={() => onTypeChangeFn("sale")}
+        >
+          Sale
+        </p>
       </div>
       <div className="flex gap-2 items-center">
-        <div className="max-lg:hidden flex gap-2 items-center text-[15px] font-bold text-neutral-700">
+        <div className="max-lg:hidden flex gap-2 items-center text-[15px] font-bold text-neutral-700 mb-2">
           Sort by:
           <Space wrap className="w-[140px]">
             <Select
@@ -38,6 +90,7 @@ const Header: FC = () => {
               className="text-base font-bold text-neutral-700"
               defaultValue={"Default Sorting"}
               options={sortingOptions}
+              onChange={(e) => sortByPrice(e)}
             />
           </Space>
         </div>

@@ -6,14 +6,18 @@ const PriceRange: FC = () => {
   const [params, setParams] = useSearchParams();
   const range_min: number = Number(params.get("range_min") ?? 0);
   const range_max: number = Number(params.get("range_max") ?? 1000);
-  const [price, setPrice] = useState<[number, number]>([range_min, range_max]);
   const category: string = String(params.get("category") ?? "house-plants");
+  const [price, setPrice] = useState<[number, number]>([range_min, range_max]);
+  const active_type: string = String(params.get("type") ?? "all-plants");
+  const sort: string = String(params.get("sort") ?? "default-sorting");
 
   const onFilterFn = () => {
     setParams({
       range_min: String(price[0]),
       range_max: String(price[1]),
       category,
+      type: active_type,
+      sort,
     });
   };
 

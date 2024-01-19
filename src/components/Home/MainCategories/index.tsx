@@ -7,7 +7,7 @@ const MainCategories: FC = () => {
   return (
     <div className="flex gap-[50px] mt-[45px]">
       <Dashboard />
-      <div className="flex flex-col gap-8 w-full">
+      <div className="flex flex-col gap-5 w-full">
         <Header />
         <FlowerContainer />
       </div>

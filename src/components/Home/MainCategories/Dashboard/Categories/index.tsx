@@ -14,6 +14,15 @@ interface DataItemsType {
 }
 
 const Categories: FC = () => {
+  const [params, setParams] = useSearchParams();
+  const active_path: string = String(params.get("category") ?? "house-plants");
+  const { category_loader } = useLoader();
+
+  const range_min: string = String(params.get("range_min") ?? 0);
+  const range_max: string = String(params.get("range_max") ?? 1000);
+  const active_type: string = String(params.get("type") ?? "all_plants");
+  const sort: string = String(params.get("sort") ?? "default-sorting");
+
   const { data, isLoading } = useQuery(
     "/categories",
     () =>
@@ -27,13 +36,6 @@ const Categories: FC = () => {
       refetchOnWindowFocus: false,
     },
   );
-
-  const [params, setParams] = useSearchParams();
-  const active_path: string = String(params.get("category") ?? "house-plants");
-  const { category_loader } = useLoader();
-
-  const range_min: string = String(params.get("range_min") ?? 0);
-  const range_max: string = String(params.get("range_max") ?? 1000);
 
   return (
     <div>
@@ -54,6 +56,8 @@ const Categories: FC = () => {
                     category: value.route_path,
                     range_min,
                     range_max,
+                    type: active_type,
+                    sort,
                   })
                 }
               >

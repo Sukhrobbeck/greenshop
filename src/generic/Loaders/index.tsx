@@ -1,4 +1,5 @@
 import { Skeleton } from "antd";
+import "../../index.css";
 
 const useLoader = () => {
   const category_loader = (count?: number) => {
