@@ -14,12 +14,14 @@ import {
 import axios from "axios";
 import { useSignIn } from "react-auth-kit";
 import { signInWithGoogle } from "../../../../config";
+import { useNotificationAPI } from "../../../../generic/NotificationAPI";
 
 const Authorization: FC = () => {
   const dispatch = useReduxDispatch();
   const { authModal } = useReduxSelector((state) => state.modal);
   const signIn = useSignIn();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const notify = useNotificationAPI();
 
   const onFinishFn = (e: { email: string; password: string }) => {
     setIsLoading(true);
@@ -30,15 +32,22 @@ const Authorization: FC = () => {
       },
       method: "POST",
       data: e,
-    }).then((res) => {
-      signIn({
-        token: res.data.data.token,
-        expiresIn: 3600,
-        tokenType: "Bearer",
-        authState: res.data.data.user,
+    })
+      .then((res) => {
+        signIn({
+          token: res.data.data.token,
+          expiresIn: 3600,
+          tokenType: "Bearer",
+          authState: res.data.data.user,
+        });
+        setIsLoading(false);
+        dispatch(setAuthModal());
+        notify("succefully_signed_in");
+      })
+      .catch(() => {
+        setIsLoading(false);
+        notify(409);
       });
-    });
-    setIsLoading(false);
   };
 
   const onGoogleAuth = async () => {
@@ -62,8 +71,8 @@ const Authorization: FC = () => {
         authState: res.data.data.user,
       });
     });
-
     dispatch(setGoogleVerification());
+    dispatch(setAuthModal());
   };
 
   return (

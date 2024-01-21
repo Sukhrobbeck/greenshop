@@ -10,7 +10,7 @@ interface CardType {
 const Card: FC<CardType> = ({ title, button_text, flower_url, img_index }) => {
   return (
     <div className="h-[450px] relative bg-[#f5f5f5] flex mt-3 max-2xl:h-[400px] max-md:h-[250px] max-[530px]:h-[280px] max-[500px]:h-[330px] max-[350px]:h-[350px]">
-      <div className="flex-[2] pl-10 max-[350px]:pl-3">
+      <div className="flex-[2] pl-10 max-sm:pl-5 max-[350px]:pl-3">
         <h3 className="font-medium text-base text-[#3d3d3d] mt-[68px] max-lg:text-sm max-md:text-xs max-md:mt-[35px] max-[840px]:mt-[50px] max-[1250px]:mt-[40px]">
           WELCOME TO GREENSHOP
         </h3>

@@ -17,6 +17,7 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const userData = useAuthUser()();
   const isAuthed = useIsAuthenticated()();
+
   return (
     <>
       <div className="w-[80%] p-[32px] m-auto flex justify-between border-b border-[#46a358] max-sm:w-[95%] max-[350px]:px-[16px]">

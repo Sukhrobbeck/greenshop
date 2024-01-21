@@ -1,6 +1,14 @@
 import { Skeleton } from "antd";
 import "../../index.css";
 
+type icon_and_based_loader = {
+  src: string;
+  className?: string;
+  alt?: string;
+  onClick?: () => any;
+  type: "image" | "icon";
+};
+
 const useLoader = () => {
   const category_loader = (count?: number) => {
     count = count ?? 9;
@@ -46,10 +54,41 @@ const useLoader = () => {
     ));
   };
 
+  const IconAndImageBasedLoader = ({
+    src,
+    className,
+    alt = "icon_loader",
+    onClick,
+    // type,
+  }: icon_and_based_loader) => {
+    // const [isLoading, setLoading] = useState<boolean>(true);
+
+    return (
+      <>
+        {/* {isLoading ? (
+          type === "image" ? (
+            isLoading && <Skeleton.Image className={className} active={true} />
+          ) : (
+            <Skeleton.Avatar active={true} />
+          )
+        ) : null} */}
+        <img
+          onClick={onClick}
+          // className={`${className} ${!isLoading ? "flex" : "hidden"}`}
+          className={className}
+          src={src}
+          alt={alt}
+          // onLoad={() => setLoading(false)}
+        />
+      </>
+    );
+  };
+
   return {
     category_loader,
     discount_loader,
     card_loader,
+    IconAndImageBasedLoader,
   };
 };
 
