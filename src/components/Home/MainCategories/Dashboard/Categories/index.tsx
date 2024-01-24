@@ -20,7 +20,7 @@ const Categories: FC = () => {
 
   const range_min: string = String(params.get("range_min") ?? 0);
   const range_max: string = String(params.get("range_max") ?? 1000);
-  const active_type: string = String(params.get("type") ?? "all_plants");
+  const active_type: string = String(params.get("type") ?? "all-plants");
   const sort: string = String(params.get("sort") ?? "default-sorting");
 
   const { data, isLoading } = useQuery(

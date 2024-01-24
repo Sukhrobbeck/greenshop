@@ -50,3 +50,12 @@ export type AuthUserType = {
     update: boolean;
   };
 };
+
+type authDataType = {
+  token: string;
+  user: object;
+};
+
+export type AuthResponseType = {
+  data: authDataType;
+};

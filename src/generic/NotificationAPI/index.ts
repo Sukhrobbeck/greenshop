@@ -18,9 +18,10 @@ type status_string_type =
   | "blog_create_success"
   | "invitation_sent"
   | "google_auth_success"
-  | "not_support"
+  | "not_supported"
   | "not_premium"
-  | "succefully_signed_in";
+  | "succefully_signed_in"
+  | "succefully_registered";
 
 export const useNotificationAPI = () => {
   const notFoundError = {
@@ -104,7 +105,7 @@ export const useNotificationAPI = () => {
         return notification.success({
           message: "Successfully authenticated via Google!",
         });
-      case "not_support":
+      case "not_supported":
         return notification.info({
           message: "Not yet supported!",
         });
@@ -115,6 +116,10 @@ export const useNotificationAPI = () => {
       case "succefully_signed_in":
         return notification.success({
           message: "You successfully signed in",
+        });
+      case "succefully_registered":
+        return notification.success({
+          message: "You successfully registered",
         });
       default:
         return notification.error({

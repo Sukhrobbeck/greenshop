@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Payload {
+  payload: string;
+}
+
 const modalSlice = createSlice({
   name: "modalSlice",
   initialState: {
     siteMapvisibility: false,
     authModal: false,
     googleVerification: false,
+    activeSignInMethod: "signIn",
+    googleAuthVisibility: false,
   },
   reducers: {
     setSiteMapVisibility(state) {
@@ -17,9 +23,20 @@ const modalSlice = createSlice({
     setGoogleVerification(state) {
       state.googleVerification = !state.googleVerification;
     },
+    setActiveSignInMethod(state: any, payload: { payload: Payload }) {
+      state.activeSignInMethod = payload.payload.payload;
+    },
+    setGoogleAuthVisibility(state, { payload }) {
+      state.googleAuthVisibility = !state.googleAuthVisibility;
+    },
   },
 });
 
 export default modalSlice.reducer;
-export const { setSiteMapVisibility, setAuthModal, setGoogleVerification } =
-  modalSlice.actions;
+export const {
+  setSiteMapVisibility,
+  setAuthModal,
+  setGoogleVerification,
+  setActiveSignInMethod,
+  setGoogleAuthVisibility,
+} = modalSlice.actions;
