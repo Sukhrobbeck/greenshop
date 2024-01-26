@@ -22,9 +22,6 @@ const ShortDescription: FC<Product> = ({ data, isLoading, isError }) => {
   const [activeSize, setActiveSize] = useState(String("s"));
   const [count, setCount] = useState(0);
 
-  console.log(activeSize);
-  console.log(activeSize === "s");
-
   const [addedToWhishlist, setAddedToWhishlist] = useState(false);
 
   return (

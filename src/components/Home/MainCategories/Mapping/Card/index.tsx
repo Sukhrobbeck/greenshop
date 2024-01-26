@@ -5,23 +5,7 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-
-interface FlowerDataTypes {
-  main_image: string;
-  detailed_images: object;
-  category: string;
-  title: string;
-  price: number;
-  dicount: boolean;
-  description: string;
-  short_description: string;
-  rate: number;
-  tags: object;
-  created_at: string;
-  created_by: string;
-  __v: number;
-  _id: string;
-}
+import { FlowerDataTypes } from "../../../../../@types";
 
 const Card: FC<FlowerDataTypes> = ({
   main_image,

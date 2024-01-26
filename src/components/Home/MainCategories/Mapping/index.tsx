@@ -4,25 +4,9 @@ import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import Card from "./Card";
 import useLoader from "../../../../generic/Loaders";
+import { FlowerDataTypes } from "../../../../@types";
 
-interface FlowerDataTypes {
-  main_image: string;
-  detailed_images: object;
-  catrgory: string;
-  title: string;
-  price: number;
-  dicount: boolean;
-  description: string;
-  short_description: string;
-  rate: number;
-  tags: object;
-  created_at: string;
-  created_by: string;
-  __v: number;
-  _id: string;
-}
-
-const FlowerContainer: FC = () => {
+const FlowerContainer: FC<FlowerDataTypes> = () => {
   const [params] = useSearchParams();
   const category: string = String(params.get("category") ?? "house-plants");
   const range_min: string = String(params.get("range_min") ?? 0);

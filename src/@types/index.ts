@@ -81,6 +81,6 @@ export type FlowerDataTypes = {
 export type Product = {
   className?: string;
   isLoading?: boolean;
-  data: FlowerDataTypes;
+  data?: FlowerDataTypes;
   isError?: boolean;
 };

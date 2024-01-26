@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import ImageGalery from "./ImageGalery";
 import ShopNavigator from "./ShopNavigator";
 import ShortDescription from "./ShortDescription";
+import FullDescription from "./FullDescription";
+import Footer from "../Footer";
+import RelatedProducts from "./RelatedProducts";
 
 const Shop: FC = () => {
   const { category, _id } = useParams();
@@ -29,6 +32,11 @@ const Shop: FC = () => {
       <div className="w-[80%] h-full pb-[100px] flex gap-[55px]">
         <ImageGalery {...data} isLoading={isLoading} isError={isError} />
         <ShortDescription data={data} isLoading={isLoading} isError={isError} />
+      </div>
+      <div className="w-[80%] max-[400px]:w-[95%]">
+        <FullDescription data={data} isLoading={isLoading} isError={isError} />
+        <RelatedProducts data={data} />
+        <Footer />
       </div>
     </div>
   );
