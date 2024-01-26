@@ -4,11 +4,12 @@ import {
   HeartOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 interface FlowerDataTypes {
   main_image: string;
   detailed_images: object;
-  catrgory: string;
+  category: string;
   title: string;
   price: number;
   dicount: boolean;
@@ -22,7 +23,14 @@ interface FlowerDataTypes {
   _id: string;
 }
 
-const Card: FC<FlowerDataTypes> = ({ main_image, title, price }) => {
+const Card: FC<FlowerDataTypes> = ({
+  main_image,
+  title,
+  price,
+  category,
+  _id,
+}) => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="h-[300px] bg-[#f5f5f5] flex items-center justify-center relative group">
@@ -34,7 +42,10 @@ const Card: FC<FlowerDataTypes> = ({ main_image, title, price }) => {
           <div className="bg-white w-[35px] h-[35px] rounded-lg flex justify-center items-center">
             <HeartOutlined />
           </div>
-          <div className="bg-white w-[35px] h-[35px] rounded-lg flex justify-center items-center">
+          <div
+            onClick={() => navigate(`/shop/${category}/${_id}`)}
+            className="bg-white w-[35px] h-[35px] rounded-lg flex justify-center items-center"
+          >
             <SearchOutlined />
           </div>
         </div>

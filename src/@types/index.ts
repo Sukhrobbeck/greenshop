@@ -59,3 +59,28 @@ type authDataType = {
 export type AuthResponseType = {
   data: authDataType;
 };
+
+export type FlowerDataTypes = {
+  main_image: string;
+  detailed_images: object;
+  category: string;
+  title: string;
+  price: number;
+  dicount: boolean;
+  description: string;
+  short_description: string;
+  rate: number;
+  tags: object;
+  comments: string;
+  created_at: string;
+  created_by: string;
+  __v: number;
+  _id: string;
+};
+
+export type Product = {
+  className?: string;
+  isLoading?: boolean;
+  data: FlowerDataTypes;
+  isError?: boolean;
+};

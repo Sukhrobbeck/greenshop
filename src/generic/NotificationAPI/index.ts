@@ -34,7 +34,7 @@ export const useNotificationAPI = () => {
   };
 
   const addedToShopping = {
-    message: "Added to you shopping card!",
+    message: "Added to you shopping cart!",
   };
   const deletedFromShopping = {
     message: "Removed from your shopping card!",
